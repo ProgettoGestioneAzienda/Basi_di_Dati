@@ -1,0 +1,66 @@
+\chapter{Requisiti identificati}
+    \section{Analisi dei requisiti}
+        In questa sezione verranno illustrate le dinamiche chiave per la creazione di una base di dati atta alla gestione del personale e delle attività all'interno di un'azienda. L'azienda avrà due tipologie di dipendenti:
+        \begin{itemize}
+            \item Dipendenti con "contratto a progetto". Quest'ultimo possiede una data di scadenza, quindi il contratto sarà a tempo determinato;
+            \item Dipendenti assunti stabilmente dall'azienda, con contratto a tempo indeterminato.\\
+            Ciascun dipendente apparterrà, in base all'anzianità di servizio, ad una delle seguenti categorie:
+            \begin{itemize}
+                \item dipendente "junior" se lavora da meno di 3 anni
+                \item dipendente "middle" se lavora da più di 3 anni ma meno di 7
+                \item dipendente "senior" se lavora da almeno 7 anni
+            \end{itemize}
+        \end{itemize}
+
+        Un dipendente con contratto a tempo indeterminato, a prescindere da quanto tempo lavori nell'azienda, può essere promosso a dirigente. In ogni momento, può anche essere rimosso da dirigente.
+        Si vuole sviluppare uno storico degli scatti di carriera di ogni dipendente con contratto a tempo indeterminato.\\
+        
+        \noindent Si vuole tenere traccia di laboratori e progetti gestiti nell'azienda.\\
+        
+        \noindent Un laboratorio presenta:
+        \begin{itemize}
+            \item Un particolare topic di cui si occupa;
+            \item Un responsabile scientifico, il quale deve essere un dipendente senior;
+            \item Delle attrezzature.
+        \end{itemize}
+%Ricordiamoci di dire che il topic l'abbiamo modellato come attributo perchè non ha relazioni o altri attributi. Al contrario, il responsabile scientifico è un dipendente, quindi ha delle caratteristiche specifiche.
+        Per ogni laboratorio, devono esistere un solo topic e un solo responsabile scientifico che lo coordina.
+        Tuttavia, più laboratori potrebbero condividere topic o responsabile scientifico. Potrebbero esserci dipendenti che non sono responsabili scientifici.
+        
+        Inoltre, si vuole tenere traccia del numero di afferenti ad un laboratorio. Un dipendente a tempo indeterminato potrebbe afferire a più laboratori così come potrebbe non afferire ad alcuno. 
+        Ad ogni modo, il laboratorio avrà sicuramente almeno un afferente, cioè il responsabile scientifico per quel laboratorio.
+        
+        Un laboratorio potrebbe non aver lavorato ad alcun progetto, così come potrebbe aver lavorato su più progetti. Similmente, potrebbe avere delle attrezzature così come potrebbe non averne alcuna.\\
+
+        \noindent Un progetto ha diverse caratteristiche:
+        \begin{itemize}
+            \item Un CUP (codice unico progetto);
+            \item Un nome, il quale è unico nel sistema;
+            \item Un referente scientifico, il quale deve essere un dipendente senior;
+            \item Un responsabile, il quale è un dirigente;
+            \item I fondi, che finanziano il progetto, vincolati solo e unicamente a quel progetto.
+        \end{itemize}
+        
+        Per ogni progetto devono esistere e sono unici un referente scientifico ed un responsabile. Ciò nonostante, più progetti potrebbero condividere referente scientifico o responsabile. Un dipendente può anche non ricoprire questi ruoli.
+        
+        Un progetto potrebbe non essere preso in carico da nessun laboratorio, così come potrebbe essere assegnato a uno o più laboratori, fino ad un massimo di tre.\\
+        
+        Tramite i fondi di un progetto possono essere acquistate delle attrezzature di cui il progetto sarà proprietario (ad esempio, computer, robot, dispositivi mobili, sensori ...), le quali possono essere assegnate ad un laboratorio che ha lavorato al progetto. Si intende tenere traccia di tali acquisti. Le attrezzature acquistate potrebbero anche non essere utilizzate da alcun laboratorio. Nel caso, però, venissero assegnate ad un laboratorio in particolare, questo deve essere uno dei laboratori che hanno lavorato al progetto tramite cui è stata acquistata l'attrezzatura.
+        
+        I fondi di un progetto possono essere utilizzati unicamente per quel progetto e, se un progetto esiste, significa che è stato ammesso a finanziamento. Dunque, non possono esserci progetti senza fondi. Inoltre:
+        %La proprietà effettiva di queste, però, è di tutti i laboratori che lavorano al progetto finanziato dai fondi tramite cui facciamo l'acquisto.
+        %Supponiamo che è l'azienda a dare i fondi in toto, non ci curiamo della loro provenienza o divisione.
+        \begin{itemize}
+            \item Non oltre il 50\% dei fondi può essere destinato all'acquisto delle attrezzature. Malgrado ciò, è anche possibile non acquistare alcuna attrezzatura tramite i fondi di un progetto.
+            \item Non oltre il restante 50\% dei fondi è da destinare ai dipendenti assunti con un "contratto a progetto" che lavoreranno su questo progetto. L'esistenza di un dipendente con "contratto a progetto" implica che sia stato assunto con i fondi di quel progetto. Comunque, è anche possibile non assumere alcun dipendete con "contratto a progetto" con i fondi di un progetto.
+        \end{itemize}
+        Sia l'acquisto di una particolare attrezzatura che l'assunzione di un particolare dipendente con "contratto a progetto" può essere fatto solo con i fondi di un singolo progetto. Ovvero, non è possibile acquistare la stessa attrezzatura, o ingaggiare lo stesso dipendente, con fondi di più progetti diversi. Un dipendente con "contratto a progetto" non può lavorare su più progetti (o non lavorare ad alcuno) poiché è stato ingaggiato per lavorare a quel progetto specifico.
+
+
+    \section{Scelte progettuali}
+        Vengono introdotti di seguito alcuni attributi che solitamente si intende tracciare in una base dati, come le generalità di un dipendente, il nome di un laboratorio o di un'attrezzatura, una data di inizio e fine progetto.
+        
+        In particolare, per quanto riguarda i dipendenti, introduciamo un attributo "matricola" che rappresenta, mediante l'apposito contratto, l'impegno lavorativo del dipendente presso l'azienda. Se, ad esempio, un dipendente venisse licenziato e poi riassunto, gli verrebbe assegnata una nuova matricola data dalla stipulazione di un nuovo contratto.      
+        Nel caso in cui un dipendente con contratto a tempo indeterminato venisse licenziato, e successivamente riassunto, partirà dalla classificazione "junior", dal momento che, con la stipulazione di un nuovo contratto, si otterrà un nuovo periodo di lavoro. Nonostante ciò, verrà comunque tenuta traccia nel database dei dati riguardanti la carriera del dipendente prima di essere licenziato.
+        
+        Anche i dipendenti con "contratto a progetto" saranno identificati da una matricola che verrà riassegnata ad ogni nuovo contratto, tenendo comunque traccia delle attività precedenti nel caso di vecchi contratti a progetto. Introduciamo una data di assunzione che definirà l'apertura del contratto, che non dovrà necessariamente corrispondere alla data in cui il progetto ha inizio. Tuttavia, la data di scadenza del contratto non potrà superare la data in cui il progetto ha effettivamente fine.\\

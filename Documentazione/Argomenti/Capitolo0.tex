@@ -1,0 +1,14 @@
+\chapter[Traccia: Sistema di gestione di personale e progetti all'interno di un'azienda]{Traccia}
+    \section*{Sistema di gestione di personale e progetti di un'azienda}
+        Si sviluppi un sistema informativo, composto da una base di dati relazionale e da un applicativo Java dotato di GUI (Swing o JavaFX), per la gestione del personale di un’azienda. L’azienda possiede un certo numero di impiegati, raggruppabili in 4 categorie:
+        \begin{enumerate}
+            \item Dipendente junior: colui che lavora da meno di 3 anni all’interno dell’azienda;
+            \item Dipendente middle: colui che lavora da meno di 7 ma da più di tre anni per l’azienda;
+            \item Dipendente senior: colui che lavora da almeno 7 anni per l’azienda.
+            \item Dirigenti: la classe dirigente non ha obblighi temporali di servizio. Chiunque può diventare dirigente, se mostra di averne le capacità.
+        \end{enumerate}
+        I passaggi di ruolo avvengono per anzianità di servizio. È necessario tracciare tutti gli scatti di carriera per ogni dipendente. \\
+        Nell’azienda vengono gestiti laboratori e progetti. Un laboratorio ha un particolare topic di cui si occupa, un certo numero di afferenti ed un responsabile scientifico che è un dipendente senior. Un progetto è identificato da un CUP (codice unico progetto) e da un nome (unico nel sistema). Ogni progetto ha un referente scientifico, il quale deve essere un dipendente senior dell’ente, ed un responsabile che è uno dei dirigenti. Al massimo 3 laboratori possono lavorare ad un progetto.
+        
+        
+        \textit{Per il gruppo da 3:} Un laboratorio ha diverse attrezzature (computer, robot, dispositivi mobili, sensori, …) acquistati con i fondi di un determinato progetto. Tracciare quindi gli acquisti fatti sui fondi di un progetto, con l’ovvio vincolo che il costo totale delle attrezzature non può superare il 50\% del budget di un progetto. Con il restante 50\% è possibile assumere dipendenti per l’azienda con un “contratto a progetto”. Questi contratti hanno una scadenza, a differenza degli altri che sono a tempo indeterminato.

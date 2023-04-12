@@ -1,0 +1,125 @@
+\chapter{Schema logico}
+    \section{Correzione e abbreviazioni dei nomi}
+        Costruendo lo schema logico, per facilitare la traduzione di tipi di entità e associazioni, abbiamo deciso di rinominare alcuni tipi di entità e associazioni, in modo da abbreviarne il nome e togliere eventuali spazi, in vista dello schema fisico. Di seguito la lista di tutte le modifiche apportate. Rinominiamo:
+        \begin{itemize}
+            \item "DIPENDENTE CON CONTRATTO A TEMPO INDETERMINATO" in "DIP\_INDETERMINATO"
+                \begin{itemize}
+                    \item "Codice Fiscale" in "codFiscale"
+                    \item "Indirizzo di residenza" in "Indirizzo"
+                    \item "Data di nascita" in "dataNascita"
+                    \item "Data di assunzione" in "dataAssunzione"
+                    \item "Data di fine rapporto" in "dataFine"
+                \end{itemize}
+            \item "DIPENDENTE CON CONTRATTO A PROGETTO" in "DIP\_PROGETTO"
+                \begin{itemize}
+                    \item "Codice Fiscale" in "codFiscale"
+                    \item "Indirizzo di residenza" in "Indirizzo"
+                    \item "Data di nascita" in "dataNascita"
+                    \item "Data di assunzione" in "dataAssunzione"
+                \end{itemize}
+            \item "SCATTO DI CARRIERA" in "SCATTO\_CARRIERA"
+            \item "RESPONSABILE SCIENTIFICO" in "RESPONSABILE\_SCIENTIFICO"
+            \item "REFERENTE SCIENTIFICO" in "REFERENTE\_SCIENTIFICO"
+            \item "LABORATORIO"
+                \begin{itemize}
+                    \item "Numero di afferenti" in "nAfferenti"
+                \end{itemize}
+            \item "PROGETTO"
+                \begin{itemize}
+                    \item "Data inizio" in "dataInizio"
+                    \item "Data fine" in "dataFine"
+                    \item "Budget totale" in "Budget"
+                    \item "Costo totale contratti a progetto" in "costoContrattiProgetto"
+                    \item "Costo totale attrezzature" in "costoAttrezzature"
+                \end{itemize}
+        \end{itemize}
+
+    \section{Mappatura dei tipi di associazioni}
+    Di seguito vengono discussi i criteri adottati per la mappatura delle varie tipologie di associazioni.
+
+    \begin{itemize}
+        \item Mappatura di tipi di associazioni identificanti:
+        
+        \begin{enumerate}
+            \item Associazione "PROGRESSIONE":\\
+                Nel tipo di entità debole "SCATTO CARRIERA" viene inserito l'attributo di chiave esterna "Matricola", che fa riferimento all'attributo di chiave primaria "Matricola" del tipo di entità "DIP\_INDETERMINATO". La chiave parziale del tipo di entità debole "SCATTO CARRIERA" sarà composta dal nuovo attributo di chiave esterna "Matricola" e dagli attributi "Tipo" e "Data", che formavano la precedente chiave parziale.
+        \end{enumerate}
+
+        \item Associazioni binarie 1:N:\\
+            Per ogni associazione riportata, viene utilizzato l'approccio \textbf{\textit{basato su chiavi esterne}}.
+        
+        \begin{enumerate}
+            \item Associazione "RESPONSABILE SCIENTIFICO":\\
+                Nel tipo di entità "LABORATORIO", avente cardinalità "N" rispetto l'associazione, viene inserito l'attributo di chiave esterna "Responsabile\_Scientifico", che farà riferimento all'attributo di chiave primaria "Matricola" del tipo di entità "DIP\_INDETERMINATO".
+            
+            \item Associazione "REFERENTE SCIENTIFICO":\\
+                Nel tipo di entità "PROGETTO", avente cardinalità "N" rispetto l'associazione, viene inserito l'attributo di chiave esterna "Referente\_Scientifico", che farà riferimento all'attributo di chiave primaria "Matricola" del tipo di entità "DIP\_INDETERMINATO".
+            
+            \item Associazione "RESPONSABILE":\\
+                Nel tipo di entità "PROGETTO", avente cardinalità "N" rispetto l'associazione, viene inserito l'attributo di chiave esterna "Responsabile", che farà riferimento all'attributo di chiave primaria "Matricola" del tipo di entità "DIP\_INDETERMINATO".
+            
+            \item Associazione "POSSEDERE":\\
+                Nel tipo di entità "ATTREZZATURA", avente cardinalità "N" rispetto l'associazione, viene inserito l'attributo di chiave esterna "nomeLab", che farà riferimento all'attributo di chiave primaria "Nome" del tipo di entità "LABORATORIO".
+            
+            \item Associazione "ACQUISTO":\\
+                Nel tipo di entità "ATTREZZATURA", avente cardinalità "N" rispetto l'associazione, viene inserito l'attributo di chiave esterna "CUP", che farà riferimento all'attributo di chiave primaria "CUP" del tipo di entità "PROGETTO". Inoltre, nel tipo di entità, verrà inserito l'attributo "Costo" dell'associazione in questione.
+            
+            \item Associazione "INGAGGIARE":\\
+                Nel tipo di entità "DIP\_PROGETTO", avente cardinalità "N" rispetto l'associazione, viene inserito l'attributo di chiave esterna "CUP", che farà riferimento all'attributo di chiave primaria "CUP" del tipo di entità "PROGETTO". Inoltre, nel tipo di entità, verrà inserito l'attributo "Costo" dell'associazione in questione.
+            
+        \end{enumerate}
+
+        \newpage
+
+        \item Associazioni binarie M:N:\\
+            Per ogni associazione riportata, viene utilizzato l'approccio \textbf{\textit{basato su relazione di relazioni}}.
+
+        \begin{enumerate}
+            \item Associazione "AFFERIRE":\\
+                Viene creata una nuova relazione "AFFERIRE" composta dai seguenti attributi di chiave esterna: "Matricola", che fa riferimento all'attributo di chiave primaria "Matricola" del tipo di entità "DIP\_INDETERMINATO", e "nomeLab", che fa riferimento all'attributo di chiave primaria "Nome" del tipo di entità "LABORATORIO".\\
+                La chiave primaria della nuova relazione sarà formata da entrambi gli attributi di chiave esterna.
+
+            \item Associazione "LAVORARE":\\
+                Viene creata una nuova relazione "LAVORARE" composta dai seguenti attributi di chiave esterna: "CUP", che fa riferimento all'attributo di chiave primaria "CUP" del tipo di entità "PROGETTO", e "nomeLab", che fa riferimento all'attributo di chiave primaria "Nome" del tipo di entità "LABORATORIO".\\
+                La chiave primaria della nuova relazione sarà composta da entrambi gli attributi di chiave esterna.
+
+        \end{enumerate}
+    \end{itemize}
+
+    \newpage
+    \section{Schema logico}
+        \begin{itemize}
+            \item DIP\_INDETERMINATO(\underline{Matricola}, Tipo, Nome, Cognome, codFiscale, Indirizzo, dataNascita, dataAssunzione, dataFine, Dirigente)
+            \item SCATTO\_CARRIERA(\underline{Matricola, Tipo, Data})
+                \begin{description}
+                    \item SCATTO\_CARRIERA.Matricola \(\rightarrow\) DIP\_INDETERMINATO.Matricola
+                \end{description}
+            \item LABORATORIO(\underline{Nome}, Topic, nAfferenti, Responsabile\_Scientifico)
+                \begin{description}
+                    \item LABORATORIO.Responsabile\_Scientifico \(\rightarrow\) DIP\_INDETERMINATO.Matricola
+                \end{description}
+            \item AFFERIRE(\underline{Matricola, nomeLab})
+                \begin{description}
+                    \item AFFERIRE.Matricola \(\rightarrow\) DIP\_INDETERMINATO.Matricola
+                    \item AFFERIRE.nomeLab \(\rightarrow\) LABORATORIO.Nome
+                \end{description}
+            \item PROGETTO(\underline{CUP}, Nome, dataInizio, dataFine, Budget, costoAttrezzature, costoContrattiProgetto, Referente\_Scientifico, Responsabile)
+                \begin{description}
+                    \item PROGETTO.Referente\_Scientifico \(\rightarrow\) DIP\_INDETERMINATO.Matricola
+                    \item PROGETTO.Responsabile \(\rightarrow\) DIP\_INDETERMINATO.Matricola
+                \end{description}
+            \item LAVORARE(\underline{CUP, nomeLab})
+                \begin{description}
+                    \item LAVORARE.CUP \(\rightarrow\) PROGETTO.CUP
+                    \item LAVORARE.nomeLab \(\rightarrow\) LABORATORIO.Nome
+                \end{description}
+            \item ATTREZZATURA(\underline{idAttrezzatura}, Descrizione, nomeLab, CUP, Costo)
+                \begin{description}
+                    \item ATTREZZATURA.nomeLab \(\rightarrow\) LABORATORIO.Nome
+                    \item ATTREZZATURA.CUP \(\rightarrow\) PROGETTO.CUP
+                \end{description}
+            \item DIP\_PROGETTO(\underline{Matricola}, Nome, Cognome, codFiscale, Indirizzo, dataNascita, dataAssunzione, Scadenza, CUP, Costo)
+                \begin{description}
+                    \item DIP\_PROGETTO.CUP \(\rightarrow\) PROGETTO.CUP
+                \end{description}
+            \end{itemize}

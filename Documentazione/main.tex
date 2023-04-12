@@ -1,0 +1,72 @@
+\documentclass{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[italian]{babel}
+\usepackage[margin=3.0cm]{geometry}
+\usepackage{multirow}
+\usepackage{graphicx}
+    \graphicspath{ {./Immagini/} }
+\usepackage[colorlinks=true, allcolors=black]{hyperref}
+\usepackage{array}
+    \newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+    \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+    \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\usepackage{titlesec}
+    \titleformat{\chapter}[display]{\normalfont}{\LARGE\scshape Capitolo \thechapter}{0.5cm}{\huge\bfseries}
+    \titlespacing{\chapter}{0cm}{-0.7cm}{1.4cm}
+\usepackage{multirow} 
+    
+\setlength{\parindent}{0.7cm}
+
+\begin{document}
+
+\begin{titlepage}
+    \setcounter{chapter}{-1}
+    \begin{figure}[htbp!]
+        \begin{center}
+            \includegraphics[width=.25\textwidth]{Logo/FedericoII.png}
+        \end{center}
+    \end{figure}
+    
+    \begin{center}
+        \LARGE\bfseries SISTEMA DI GESTIONE DI PERSONALE E PROGETTI ALL’INTERNO DI UN’AZIENDA
+    \end{center}
+    
+    \begin{center}
+        \vspace{8\baselineskip}
+
+        {\LARGE Documentazione a cura di...}\\
+        \vspace{2\baselineskip}
+        
+        {\large \bfseries Valentina Piscopo} \\
+        N86004086
+	  \vspace{1\baselineskip}
+
+        {\large \bfseries Simone Scisciola} \\
+        N86004025
+	  \vspace{1\baselineskip}
+
+        {\large \bfseries Luca Piccolo} \\
+        N86004407
+        \vspace{13\baselineskip}
+
+        {\LARGE Università degli Studi di Napoli Federico II}
+	  \vspace{1\baselineskip}
+
+	  {\large \today}
+   
+    \end{center}
+\end{titlepage}
+
+\newpage
+    \tableofcontents
+    
+    \include{Argomenti/Capitolo0}
+    \include{Argomenti/Capitolo1}
+    \include{Argomenti/Capitolo2}
+    \include{Argomenti/Capitolo3}
+    \include{Argomenti/Capitolo4}
+    \include{Argomenti/Capitolo5}
+
+\end{document}

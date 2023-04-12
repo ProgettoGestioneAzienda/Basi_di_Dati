@@ -1,0 +1,36 @@
+
+1.
+Nel tipo di entità "LABORATORIO", è presente l'attributo ridondante "nAfferenti". 
+Si consideri la necessità di memorizzare, con periodicità mensile, le informazioni riguardanti un dipendente a tempo indeterminato, incluse le sue adesioni a uno o più laboratori.
+Inoltre, è richiesta la visualizzazione di tutti i dati relativi a un laboratorio, circa 5 volte al mese
+Tenendo conto del costo doppio degli accessi in scrittura e di un modesto consumo di memoria a supporto dell'attributo ridondante,
+si conclude che la conservazione di tale ridondanza permetterebbe di risparmiare circa la metà degli accessi mensili al database, considerando le operazioni sopra descritte.
+
+2.
+Nel tipo di entità "PROGETTO", è presente l'attributo ridondante "costoAttrezzature". 
+Si ha la necessità di registrare, con periodicità mensile, le informazioni relative ad una nuova attrezzatura, indicandone il costo e il progetto che ne fa uso. 
+Inoltre, è richiesta la visualizzazione di tutti i dati relativi ad un progetto, circa 25 volte al mese.
+Tenendo conto del costo doppio degli accessi in scrittura e che l'uso di memoria aggiuntiva per supportare l' attributo ridondante è modesto,
+si può concludere che mantenere questa ridondanza può portare a un risparmio di circa poco meno della metà degli accessi mensili al database per le operazioni descritte in precedenza.
+
+3.
+Nel tipo di entità "PROGETTO", è presente l'attributo ridondante "costoContrattiProgetto". 
+Si consideri la necessità di registrare mensilmente le informazioni relative ad un nuovo dipendente a progetto, indicandone il costo del contratto e il progetto per cui lavorerà. 
+Inoltre, è richiesta la visualizzazione di tutti i dati relativi ad un progetto, circa 25 volte al mese, come nel caso delle attrezzature.
+Tenendo conto del costo doppio degli accessi in scrittura e dell'esiguo consumo di memoria aggiuntiva per supportare l'attributo ridondante,
+si può concludere che mantenere questa ridondanza può portare a un risparmio di più della metà degli accessi mensili al database per le operazioni descritte in precedenza.
+
+Si consideri la necessità di memorizzare, con periodicità mensile, le seguenti informazioni con l'esecuzione delle relative operazioni:
+1) Dati riguardanti un nuovo dipendente a tempo indeterminato, inclusa la registrazione delle sue adesioni a uno o più laboratori, e la visualizzazione di tutti i dati relativi a un laboratorio (effettuata circa 5 volte al mese).
+
+2) Dati relativi ad una nuova attrezzatura, indicandone il costo e il progetto che ne usufruisce. Sarà richiesta la visualizzazione di tutti i dati relativi ad un progetto, effettuata circa 25 volte al mese.
+
+3) Dati relativi ad un nuovo dipendente con contratto a progetto, indicandone il costo del contratto e il progetto per cui lavorerà. 
+Sarà richiesta la visualizzazione di tutti i dati relativi ad un progetto, circa 25 volte al mese, come nel caso delle attrezzature.
+
+Tenendo conto del costo doppio degli accessi in scrittura rispetto agli accessi in lettura ed un uso di memoria molto ridotto a supporto degli attributi ridondanti, si può concludere che:
+1) Nel tipo di entità "LABORATORIO", con l'inserimento dell'attributo ridondante "nAfferenti", si ottiene un risparmio di circa la metà degli accessi mensili al database, considerando le operazioni precedentemente riportate
+
+2) Nel tipo di entità "PROGETTO", con l'inserimento dell'attributo ridondante "costoAttrezzature", si ottiene un risparmio di circa poco meno della metà degli accessi mensili al database per le operazioni precedentemente riportate
+
+3)Nel tipo di entità "PROGETTO", con l'inserimento dell'attributo ridondante "costoContrattiProgetto", si ottiene un risparmio di più della metà degli accessi mensili al database per le operazioni precendentemente riportate.
