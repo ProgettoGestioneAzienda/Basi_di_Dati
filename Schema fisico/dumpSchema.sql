@@ -902,8 +902,8 @@ $$
 LANGUAGE PLPGSQL;
 
 CREATE OR REPLACE TRIGGER c_tr_assunzione_coerente
-BEFORE INSERT OR UPDATE ON OF codFiscale, dataAssunzione, dataFine
-azienda.DIP_INDETERMINATO
+BEFORE INSERT OR UPDATE OF codFiscale, dataAssunzione, dataFine
+ON azienda.DIP_INDETERMINATO
 FOR EACH ROW
 EXECUTE FUNCTION azienda.fn_assunzione_coerente();
 
